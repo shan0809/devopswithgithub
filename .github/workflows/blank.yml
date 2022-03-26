@@ -65,12 +65,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # 1
-      - uses: actions/download-artifact@master
-        with:
-          name: release.apk
-      - uses: actions/download-artifact@master
-        with:
-          name: mapping.txt
+#       - uses: actions/download-artifact@master
+#         with:
+#           name: release.apk
+#       - uses: actions/download-artifact@master
+#         with:
+#           name: mapping.txt
       - name: Run a multi-line script
         run: |
           echo Add other actions to build,
