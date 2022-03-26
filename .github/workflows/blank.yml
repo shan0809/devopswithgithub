@@ -29,6 +29,8 @@ jobs:
         run: java -version
       - name: check gradle version
         run: gradle -v
+      - name: check file structure
+        run: ls -al
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
