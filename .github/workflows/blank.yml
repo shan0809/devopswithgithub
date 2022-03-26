@@ -25,16 +25,16 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
-      - name: check java version
-        run: java -version
-      - name: check gradle version
-        run: gradle -v
-      - name: check file structure
-        run: ls -al
-      - name: gradle build
-        run: gradle build
-      - name: gradlew build
-        run: ./gradlew build
+#       - name: check java version
+#         run: java -version
+#       - name: check gradle version
+#         run: gradle -v
+#       - name: check file structure
+#         run: ls -al
+#       - name: gradle build
+#         run: gradle build
+#       - name: gradlew build
+#         run: ./gradlew build
       - name: docker version & list images
         run: |
           docker -v
@@ -44,7 +44,9 @@ jobs:
       - name: list images
         run: |
           docker images -a  
-        
+      - name: docker login
+        run: docker login -u  ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_password }} 
+    
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
