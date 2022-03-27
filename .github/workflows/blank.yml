@@ -29,12 +29,12 @@ jobs:
 #         run: java -version
 #       - name: check gradle version
 #         run: gradle -v
-#       - name: check file structure
-#         run: ls -al
-#       - name: gradle build
-#         run: gradle build
-#       - name: gradlew build
-#         run: ./gradlew build
+      - name: check file structure
+        run: ls -al
+      - name: gradle build
+        run: gradle build
+      - name: gradlew build
+        run: ./gradlew build
 #       - name: docker version & list images
 #         run: |
 #           docker -v
