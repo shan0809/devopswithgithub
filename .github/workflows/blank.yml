@@ -77,7 +77,6 @@ jobs:
           echo test, and deploy your project.   
           
   deploy-play-store2:
-    needs: [build]
     runs-on: ubuntu-latest
     steps:      
           
@@ -88,6 +87,7 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_password}}
+          
       - name: ls -al
         run: ls -al
       - name: gradlew build
