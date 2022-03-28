@@ -32,11 +32,11 @@ jobs:
       - name: check file structure
         run: ls -al
         
-      - name: 'Run az commands'
-        run: |
-          az account show
-          az group list
-          pwd   
+#       - name: 'Run az commands'
+#         run: |
+#           az account show
+#           az group list
+#           pwd   
           
       - name: 'Az CLI login'
         uses: azure/login@v1
