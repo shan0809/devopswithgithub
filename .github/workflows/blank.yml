@@ -60,21 +60,21 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           
-#   deploy-play-store:
-#     needs: [build]
-#     runs-on: ubuntu-latest
-#     steps:
-#       # 1
-# #       - uses: actions/download-artifact@master
-# #         with:
-# #           name: release.apk
-# #       - uses: actions/download-artifact@master
-# #         with:
-# #           name: mapping.txt
-#       - name: Run a multi-line script
-#         run: |
-#           echo Add other actions to build,
-#           echo test, and deploy your project.   
+  deploy-play-store:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      # 1
+#       - uses: actions/download-artifact@master
+#         with:
+#           name: release.apk
+#       - uses: actions/download-artifact@master
+#         with:
+#           name: mapping.txt
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.   
           
 #   deploy-play-store2:
 #     runs-on: ubuntu-latest
