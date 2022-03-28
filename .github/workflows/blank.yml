@@ -31,16 +31,35 @@ jobs:
         run: gradle -v
       - name: check file structure
         run: ls -al
-      - name: gradle build
-        run: gradle build
-      - name: gradlew build
-        run: ./gradlew build
-#       - name: docker version & list images
-#         run: |
-#           docker -v
-#           docker images -a
-#       - name: docker build
-#         run: docker build . -t demo-kotlin:1.0
+        
+      - name: 'Run az commands'
+        run: |
+          az account show
+          az group list
+          pwd   
+          
+      - name: 'Az CLI login'
+        uses: azure/login@v1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+  
+      - name: 'Run az commands'
+        run: |
+          az account show
+          az group list
+          pwd   
+#       - name: gradle build
+#         run: gradle build
+#       - name: gradlew build
+#         run: ./gradlew build
+# #       - name: docker version & list images
+# #         run: |
+# #           docker -v
+# #           docker images -a
+# #       - name: docker build
+# #         run: docker build . -t demo-kotlin:1.0
       - name: list images
         if: always()
         run: |
