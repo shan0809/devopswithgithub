@@ -70,12 +70,16 @@ jobs:
 #         run: gradle build
 #       - name: gradlew build
 #         run: ./gradlew build
-# #       - name: docker version & list images
-# #         run: |
-# #           docker -v
-# #           docker images -a
-# #       - name: docker build
-# #         run: docker build . -t demo-kotlin:1.0
+      - name: docker version & list images
+        run: |
+          docker -v
+          docker images -a
+      - name: docker build
+        run: docker build . -t demo-kotlin2:2.0
+        
+      - run: |
+          kubectl apply -f .
+          kubectl get pods
       - name: list images
         if: always()
         run: |
