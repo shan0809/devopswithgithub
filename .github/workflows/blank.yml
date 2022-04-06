@@ -84,9 +84,9 @@ jobs:
         if: always()
         run: |
           docker images -a  
-      - name: docker login
-        if: always()
-        run: docker login -u  ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_password }} 
+#       - name: docker login
+#         if: always()
+#         run: docker login -u  ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_password }} 
     
 
       # Runs a single command using the runners shell
