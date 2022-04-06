@@ -68,8 +68,8 @@ jobs:
           pwd   
 #       - name: gradle build
 #         run: gradle build
-#       - name: gradlew build
-#         run: ./gradlew build
+      - name: gradlew build
+        run: ./gradlew build
       - name: docker version & list images
         run: |
           docker -v
