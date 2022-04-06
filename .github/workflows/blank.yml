@@ -47,7 +47,7 @@ jobs:
         with:
           creds: '${{ secrets.AZURE_CREDENTIALS }}'
           cluster-name: githubrg
-          resource-group: githubrg1
+          resource-group: githubrg
     
     # Create namespace if doesn't exist
       - run: |
