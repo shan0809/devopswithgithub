@@ -47,11 +47,11 @@ jobs:
         with:
           creds: '${{ secrets.AZURE_CREDENTIALS }}'
           cluster-name: githubrg
-          resource-group: githubrg
+          resource-group: githubrg1
     
     # Create namespace if doesn't exist
       - run: |
-          kubectl create namespace ${{ env.NAMESPACE }} --dry-run=client -o json | kubectl apply -f -     
+          kubectl create namespace githubrg --dry-run=client -o json | kubectl apply -f -     
           
           
 #       - name: 'Az CLI login'
