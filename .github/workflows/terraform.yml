@@ -29,12 +29,12 @@ jobs:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
         uses: actions/checkout@v2
-      - uses: hashicorp/setup-terraform@v2
+#       - uses: hashicorp/setup-terraform@v2
 
-      - name: Terraform fmt
-        id: fmt
-        run: terraform fmt -check
-        continue-on-error: true
+#       - name: Terraform fmt
+#         id: fmt
+#         run: terraform fmt -check
+#         continue-on-error: true
         
       
       - name: 'Install pre-reqs'
