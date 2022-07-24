@@ -43,7 +43,7 @@ jobs:
             unzip tflint_linux_amd64.zip
             mv tflint /usr/local/bin  
             curl -SL "https://releases.hashicorp.com/terraform/1.0.8/terraform_1.0.8_linux_amd64.zip" --output terraform.zip
-            echo "${TERRAFORM_DOWNLOAD_SHA} terraform.zip" | sha256sum -c -
+            echo "${TERRAFORM_DOWNLOAD_SHA} terraform.zip" 
             unzip "terraform.zip"
             mv terraform /usr/local/bin
             terraform --version 
