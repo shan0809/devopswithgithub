@@ -35,6 +35,14 @@ jobs:
         id: fmt
         run: terraform fmt -check
         continue-on-error: true
+        
+      
+      - name: 'Install pre-reqs'
+        run: |
+            sudo yum -y install git
+            wget https://github.com/terraform-linters/tflint/releases/download/v0.25.0/tflint_linux_amd64.zip
+            unzip tflint_linux_amd64.zip
+            sudo mv tflint /usr/local/bin  
 
       - name: Terraform Init
         id: init
