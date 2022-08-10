@@ -43,6 +43,11 @@ jobs:
 
       - name: docker images
         run: docker images -a
+      - name: docker tag
+        run: docker build . -t shan0809/devopsbootcamptw12
+      - name: docker push  shan0809/devopsbootcamptw12
+
+
         
 #       - name: 'Run az commands'
 #         run: |
