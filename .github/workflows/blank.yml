@@ -32,14 +32,21 @@ jobs:
         run: gradle -v
       - name: check file structure
         run: ls -al
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
+        with:
+            username: ${{ secrets.DOCKERHUB_USERNAME }}
+            password: ${{ secrets.DOCKERHUB_PASSWORD}}
+
+
       - name: Gradle Build
         run: gradle build
       - name: Gradle Run
         run: gradle bootrun
       - name: docker installation
         run: docker -v
-      - name: docker login
-        run: docker login -u  ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+#      - name: docker login
+#        run: docker login -u  ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: docker images
         run: docker images -a
@@ -47,6 +54,7 @@ jobs:
         run: docker build . -t shan0809/devopsbootcamptw12
       - name: docker push image
         run: docker push  shan0809/devopsbootcamptw12
+
 
 
         
