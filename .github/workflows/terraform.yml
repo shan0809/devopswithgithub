@@ -36,28 +36,28 @@ jobs:
 #         run: terraform fmt -check
 #         continue-on-error: true
        
-      - name: Create Dir
-        run: |
-          ls -al 
-          pwd 
-          if [ -d "/home/ubuntu/" ]; then 
-            echo "directory exists" 
-          else
-            echo "directory doesn't exist creating it"
-            pwd
-          fi  
+#      - name: Create Dir
+#        run: |
+#          ls -al
+#          pwd
+#          if [ -d "/home/ubuntu/" ]; then
+#            echo "directory exists"
+#          else
+#            echo "directory doesn't exist creating it"
+#            pwd
+#          fi
       
-      - name: 'Install pre-reqs'
-        run: |
-            wget https://github.com/terraform-linters/tflint/releases/download/v0.25.0/tflint_linux_amd64.zip
-            unzip tflint_linux_amd64.zip
-            mv tflint /usr/local/bin  
-            curl -SL "https://releases.hashicorp.com/terraform/1.0.8/terraform_1.0.8_linux_amd64.zip" --output terraform.zip
-            echo "${TERRAFORM_DOWNLOAD_SHA} terraform.zip" 
-            unzip "terraform.zip"
-            mv terraform /usr/local/bin
-            terraform --version 
-            rm terraform.zip
+#      - name: 'Install pre-reqs'
+#        run: |
+#            wget https://github.com/terraform-linters/tflint/releases/download/v0.25.0/tflint_linux_amd64.zip
+#            unzip tflint_linux_amd64.zip
+#            mv tflint /usr/local/bin
+#            curl -SL "https://releases.hashicorp.com/terraform/1.0.8/terraform_1.0.8_linux_amd64.zip" --output terraform.zip
+#            echo "${TERRAFORM_DOWNLOAD_SHA} terraform.zip"
+#            unzip "terraform.zip"
+#            mv terraform /usr/local/bin
+#            terraform --version
+#            rm terraform.zip
 
       - name: Terraform Init
         id: init
@@ -73,82 +73,82 @@ jobs:
         run: terraform plan -no-color
         continue-on-error: true
 
-      - uses: actions/github-script@v6
-#        if: github.event_name == 'pull_request'
-        env:
-          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
-        with:
-          script: |
-            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
-            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
-            #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
-            <details><summary>Validation Output</summary>
-
-            \`\`\`\n
-            ${{ steps.validate.outputs.stdout }}
-            \`\`\`
-
-            </details>
-
-            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
-
-            <details><summary>Show Plan</summary>
-
-            \`\`\`\n
-            ${process.env.PLAN}
-            \`\`\`
-
-            </details>
-
-            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
-
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: output
-            })  
-
-      - name: 'Terraform Format'
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 0.14.8
-          tf_actions_subcommand: 'fmt'
-          tf_actions_working_dir: "./terraform"
-
-      - name: 'Terraform Init'
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 0.14.8
-          tf_actions_subcommand: 'init'
-          tf_actions_working_dir: "terraform"
-
-      - name: 'Terraform Validate'
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 0.14.8
-          tf_actions_subcommand: 'validate'
-          tf_actions_working_dir: "terraform"
-
-      - name: 'Terraform Plan'
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 0.14.8
-          tf_actions_subcommand: 'plan'
-          tf_actions_working_dir: "terraform"
-
-      - name: Terraform Apply
-        if: github.ref == 'refs/heads/main'
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 0.14.8
-          tf_actions_subcommand: 'apply'
-          tf_actions_working_dir: "terraform"
-
-      - name: Terraform Destroy
-        if: github.ref == 'refs/heads/main'
-        uses: hashicorp/terraform-github-actions@master
-        with:
-            tf_actions_version: 0.14.8
-            tf_actions_subcommand: 'destroy'
-            tf_actions_working_dir: "terraform"
+#      - uses: actions/github-script@v6
+##        if: github.event_name == 'pull_request'
+#        env:
+#          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+#        with:
+#          script: |
+#            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+#            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+#            #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
+#            <details><summary>Validation Output</summary>
+#
+#            \`\`\`\n
+#            ${{ steps.validate.outputs.stdout }}
+#            \`\`\`
+#
+#            </details>
+#
+#            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+#
+#            <details><summary>Show Plan</summary>
+#
+#            \`\`\`\n
+#            ${process.env.PLAN}
+#            \`\`\`
+#
+#            </details>
+#
+#            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
+#
+#            github.rest.issues.createComment({
+#              issue_number: context.issue.number,
+#              owner: context.repo.owner,
+#              repo: context.repo.repo,
+#              body: output
+#            })
+#
+#      - name: 'Terraform Format'
+#        uses: hashicorp/terraform-github-actions@master
+#        with:
+#          tf_actions_version: 0.14.8
+#          tf_actions_subcommand: 'fmt'
+#          tf_actions_working_dir: "./terraform"
+#
+#      - name: 'Terraform Init'
+#        uses: hashicorp/terraform-github-actions@master
+#        with:
+#          tf_actions_version: 0.14.8
+#          tf_actions_subcommand: 'init'
+#          tf_actions_working_dir: "terraform"
+#
+#      - name: 'Terraform Validate'
+#        uses: hashicorp/terraform-github-actions@master
+#        with:
+#          tf_actions_version: 0.14.8
+#          tf_actions_subcommand: 'validate'
+#          tf_actions_working_dir: "terraform"
+#
+#      - name: 'Terraform Plan'
+#        uses: hashicorp/terraform-github-actions@master
+#        with:
+#          tf_actions_version: 0.14.8
+#          tf_actions_subcommand: 'plan'
+#          tf_actions_working_dir: "terraform"
+#
+#      - name: Terraform Apply
+#        if: github.ref == 'refs/heads/main'
+#        uses: hashicorp/terraform-github-actions@master
+#        with:
+#          tf_actions_version: 0.14.8
+#          tf_actions_subcommand: 'apply'
+#          tf_actions_working_dir: "terraform"
+#
+#      - name: Terraform Destroy
+#        if: github.ref == 'refs/heads/main'
+#        uses: hashicorp/terraform-github-actions@master
+#        with:
+#            tf_actions_version: 0.14.8
+#            tf_actions_subcommand: 'destroy'
+#            tf_actions_working_dir: "terraform"

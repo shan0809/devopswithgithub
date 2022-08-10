@@ -19,14 +19,20 @@ resource "random_pet" "rg-name" {
 }
 
 resource "azurerm_resource_group" "rg" {
-  name     = random_pet.rg-name.id
+  name     = "twbootcampdemo"
   location = var.resource_group_location
 }
 
+
+resource "azurerm_resource_group" "twdemo" {
+  location = "north europe"
+  name = "createdviapipeline"
+}
 variable "resource_group_name_prefix" {
   default     = "rg"
   description = "Prefix of the resource group name that's combined with a random ID so name is unique in your Azure subscription."
 }
+
 
 variable "resource_group_location" {
   default     = "eastus"
