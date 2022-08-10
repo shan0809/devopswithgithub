@@ -35,7 +35,17 @@ jobs:
 #         id: fmt
 #         run: terraform fmt -check
 #         continue-on-error: true
-        
+       
+      - name: Create Dir
+        run: |
+          ls -al 
+          pwd 
+          if [ -d "/home/ubuntu/" ]; then 
+            echo "directory exists" 
+          else
+            echo "directory doesn't exist creating it"
+            pwd
+          fi  
       
       - name: 'Install pre-reqs'
         run: |
