@@ -156,7 +156,7 @@ jobs:
       url: https://github.com
     steps:
       - name: deploy
-        # ...deployme         
+        run: echo "helloworld"       
           
   deploy-play-store:
     needs: [build]
