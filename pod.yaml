@@ -1,13 +1,13 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: static-web
+  name: static-webtw
   labels:
     role: myrole
 spec:
   containers:
     - name: web
-      image: shan0809/demo-kotlin2:2.0
+      image: shan0809/devopsbootcamptw
       ports:
         - name: web
           containerPort: 80

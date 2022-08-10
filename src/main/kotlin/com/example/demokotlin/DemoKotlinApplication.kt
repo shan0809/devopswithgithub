@@ -19,7 +19,7 @@ package demo.kotlinhelloworld
 class App {
 	val greeting: String
 		get() {
-			return "Hello World!, wassup?"
+			return "Hello World!, hows the training?"
 		}
 }
 

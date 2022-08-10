@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI
+name: Continous Integration
 
 # Controls when the workflow will run
 on:
@@ -31,39 +31,37 @@ jobs:
         run: gradle -v
       - name: check file structure
         run: ls -al
+      - name: Gradle Build
+        run: gradle build
+      - name: Gradle Run
+        run: gradle bootrun
         
 #       - name: 'Run az commands'
 #         run: |
 #           az account show
 #           az group list
 #           pwd   
-          
-      - name: Log in with Azure
-        uses: azure/login@v1
-        with:
-          creds: '${{ secrets.AZURE_CREDENTIALS }}'   
-      
-       
-     
-      - name: Login to DockerHub
-        uses: docker/login-action@v1 
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_password}}
-          
-      - name: gradlew build
-        run: gradle build       
-      
-      -  name: Build and push
-         uses: docker/build-push-action@v2
-         with:
-          context: .
-          push: true
-          tags: shan0809/app:latest 
-      
-#       name: Build and push
+#
+#      - name: Log in with Azure
+#        uses: azure/login@v1
+#        with:
+#          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+#
+#
+#
+#      - name: Login to DockerHub
+#        uses: docker/login-action@v1
+#        with:
+#          username: ${{ secrets.DOCKERHUB_USERNAME }}
+#          password: ${{ secrets.DOCKERHUB_password}}
+#
+#      - name: gradlew build
+#        run: gradle build
+#
+#      -  name: Build and push
 #         uses: docker/build-push-action@v2
 #         with:
+
 #           context: .
 #           push: true
 #           tags: user/app:latest    
@@ -93,105 +91,205 @@ jobs:
 #           pwd   
 # #       - name: gradle build
 # #         run: gradle build
-      - name: gradlew build
-        run: ./gradlew build
-      - name: docker version & list images
-        run: |
-          docker -v
-          docker images -a
-      - name: docker build
-        run: docker build . -t demo-kotlin2:2.0
-        
-#       - run: |
-#           kubectl apply -f .
-#           kubectl get pods
-      
-         
-      - name: list images
-        if: always()
-        run: |
-          docker images -a  
-#       - name: docker login
-#         if: always()
-#         run: docker login -u  ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_password }} 
-    
-
-      # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: echo Hello, world!
-
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
-          
-      - name: Login to DockerHub
-        uses: docker/login-action@v1 
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_password}}
-      
-      -  name: Build and push
-         uses: docker/build-push-action@v2
-         with:
-          push: true
-          tags: user/app:latest  
-          
-#       - name: ls -al
-#         run: ls -al
-#       - name: gradlew build
-#         run: gradle build    
-      
-      -  name: Build and push
-         uses: docker/build-push-action@v2
-         with:
-          push: true
-          tags: user/app:latest    
- 
-  AutomatedDeploy:
-    runs-on: ubuntu-latest
-    environment: production
-    steps:
-      - name: deploy
-        run: echo "helloworld"       
-          
-  deploy-play-store:
-    needs: [build]
-    runs-on: ubuntu-latest
-    steps:
-      # 1
-#       - uses: actions/download-artifact@master
+#      - name: gradlew build
+#        run: ./gradlew build
+#      - name: docker version & list images
+#        run: |
+#          docker -v
+#          docker images -a
+#      - name: docker build
+#        run: docker build . -t demo-kotlin2:2.0
+#
+##       - run: |
+##           kubectl apply -f .
+##           kubectl get pods
+#
+#
+#      - name: list images
+#        if: always()
+#        run: |
+#          docker images -a
+##       - name: docker login
+##         if: always()
+##         run: docker login -u  ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_password }}
+#
+#
+#      # Runs a single command using the runners shell
+#      - name: Run a one-line script
+#        run: echo Hello, world!
+#
+#      # Runs a set of commands using the runners shell
+#      - name: Run a multi-line script
+#        run: |
+#          echo Add other actions to build,
+#          echo test, and deploy your project.
+#
+#      - name: Login to DockerHub
+#        uses: docker/login-action@v1
+#        with:
+#          username: ${{ secrets.DOCKERHUB_USERNAME }}
+#          password: ${{ secrets.DOCKERHUB_password}}
+#
+#      -  name: Build and push
+#         uses: docker/build-push-action@v2
 #         with:
-#           name: release.apk
-#       - uses: actions/download-artifact@master
+#          push: true
+#          tags: user/app:latest
+#
+##       - name: ls -al
+##         run: ls -al
+##       - name: gradlew build
+##         run: gradle build
+#
+#      -  name: Build and push
+#         uses: docker/build-push-action@v2
 #         with:
-#           name: mapping.txt
-      - name: Run a multi-line script
-        run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.   
-          
-#   deploy-play-store2:
-#     runs-on: ubuntu-latest
-#     steps:      
-          
-#       - uses: actions/checkout@v2
-
-      - name: Login to DockerHub
-        uses: docker/login-action@v1 
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_password}}
-          
-#       - name: ls -al
-#         run: ls -al
-#       - name: gradlew build
-#         run: gradle build    
-      
-      -  name: Build and push
-         uses: docker/build-push-action@v2
-         with:
-          push: true
-          tags: user/app:latest    
-    
+#          push: true
+#          tags: user/app:latest
+#
+#  AutomatedDeploy:
+#    runs-on: ubuntu-latest
+#    environment: production
+#    steps:
+#      - name: deploy
+#        run: echo "helloworld"
+#
+#  deploy-play-store:
+#    needs: [build]
+#    runs-on: ubuntu-latest
+#    steps:
+#      # 1
+##       - uses: actions/download-artifact@master
+#
+##          context: .
+##          push: true
+##          tags: shan0809/app:latest
+##
+###       name: Build and push
+###         uses: docker/build-push-action@v2
+###         with:
+###           context: .
+###           push: true
+###           tags: user/app:latest
+##
+##      - uses: azure/aks-set-context@v1
+##        with:
+##          creds: '${{ secrets.AZURE_CREDENTIALS }}'
+##          cluster-name: githubrg
+##          resource-group: githubrg
+##
+##    # Create namespace if doesn't exist
+##      - run: |
+##          kubectl create namespace githubrg --dry-run=client -o json | kubectl apply -f -
+##
+##
+###       - name: 'Az CLI login'
+###         uses: azure/login@v1
+###         with:
+###           client-id: ${{ secrets.AZURE_CLIENT_ID }}
+###           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+###           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+##
+##      - name: 'Run az commands'
+##        run: |
+##          az account show
+##          az group list
+##          pwd
+###       - name: gradle build
+###         run: gradle build
+##      - name: gradlew build
+##        run: ./gradlew build
+##      - name: docker version & list images
+##        run: |
+##          docker -v
+##          docker images -a
+##      - name: docker build
+##        run: docker build . -t demo-kotlin2:2.0
+##
+##      - run: |
+##          kubectl apply -f .
+##          kubectl get pods
+##
+##
+##      - name: list images
+##        if: always()
+##        run: |
+##          docker images -a
+###       - name: docker login
+###         if: always()
+###         run: docker login -u  ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_password }}
+##
+##
+##      # Runs a single command using the runners shell
+##      - name: Run a one-line script
+##        run: echo Hello, world!
+##
+##      # Runs a set of commands using the runners shell
+##      - name: Run a multi-line script
+##        run: |
+##          echo Add other actions to build,
+##          echo test, and deploy your project.
+##
+##      - name: Login to DockerHub
+##        uses: docker/login-action@v1
+##        with:
+##          username: ${{ secrets.DOCKERHUB_USERNAME }}
+##          password: ${{ secrets.DOCKERHUB_password}}
+##
+##      -  name: Build and push
+##         uses: docker/build-push-action@v2
+##         with:
+##          push: true
+##          tags: user/app:latest
+##
+###       - name: ls -al
+###         run: ls -al
+###       - name: gradlew build
+###         run: gradle build
+##
+##      -  name: Build and push
+##         uses: docker/build-push-action@v2
+#
+##         with:
+##          push: true
+##          tags: user/app:latest
+##
+##  deploy-play-store:
+##    needs: [build]
+##    runs-on: ubuntu-latest
+##    steps:
+##      # 1
+###       - uses: actions/download-artifact@master
+###         with:
+###           name: release.apk
+###       - uses: actions/download-artifact@master
+###         with:
+###           name: mapping.txt
+##      - name: Run a multi-line script
+##        run: |
+##          echo Add other actions to build,
+##          echo test, and deploy your project.
+##
+###   deploy-play-store2:
+###     runs-on: ubuntu-latest
+###     steps:
+##
+###       - uses: actions/checkout@v2
+##
+##      - name: Login to DockerHub
+##        uses: docker/login-action@v1
+##        with:
+##          username: ${{ secrets.DOCKERHUB_USERNAME }}
+##          password: ${{ secrets.DOCKERHUB_password}}
+##
+###       - name: ls -al
+###         run: ls -al
+###       - name: gradlew build
+###         run: gradle build
+##
+##      -  name: Build and push
+##         uses: docker/build-push-action@v2
+##         with:
+##          push: true
+##          tags: user/app:latest
+##
