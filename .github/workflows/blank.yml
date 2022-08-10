@@ -45,7 +45,8 @@ jobs:
         run: docker images -a
       - name: docker tag
         run: docker build . -t shan0809/devopsbootcamptw12
-      - name: docker push  shan0809/devopsbootcamptw12
+      - name: docker push image
+        run: docker push  shan0809/devopsbootcamptw12
 
 
         
