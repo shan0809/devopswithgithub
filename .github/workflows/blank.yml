@@ -68,15 +68,15 @@ jobs:
 #           push: true
 #           tags: user/app:latest    
       
-      - uses: azure/aks-set-context@v1
-        with:
-          creds: '${{ secrets.AZURE_CREDENTIALS }}'
-          cluster-name: githubrg
-          resource-group: githubrg
+#       - uses: azure/aks-set-context@v1
+#         with:
+#           creds: '${{ secrets.AZURE_CREDENTIALS }}'
+#           cluster-name: githubrg
+#           resource-group: githubrg
     
-    # Create namespace if doesn't exist
-      - run: |
-          kubectl create namespace githubrg --dry-run=client -o json | kubectl apply -f -     
+#     # Create namespace if doesn't exist
+#       - run: |
+#           kubectl create namespace githubrg --dry-run=client -o json | kubectl apply -f -     
           
           
 #       - name: 'Az CLI login'
@@ -86,13 +86,13 @@ jobs:
 #           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
 #           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
   
-      - name: 'Run az commands'
-        run: |
-          az account show
-          az group list
-          pwd   
-#       - name: gradle build
-#         run: gradle build
+#       - name: 'Run az commands'
+#         run: |
+#           az account show
+#           az group list
+#           pwd   
+# #       - name: gradle build
+# #         run: gradle build
       - name: gradlew build
         run: ./gradlew build
       - name: docker version & list images
@@ -102,9 +102,9 @@ jobs:
       - name: docker build
         run: docker build . -t demo-kotlin2:2.0
         
-      - run: |
-          kubectl apply -f .
-          kubectl get pods
+#       - run: |
+#           kubectl apply -f .
+#           kubectl get pods
       
          
       - name: list images
@@ -147,7 +147,16 @@ jobs:
          uses: docker/build-push-action@v2
          with:
           push: true
-          tags: user/app:latest      
+          tags: user/app:latest    
+ 
+  AutomatedDeploy:
+    runs-on: ubuntu-latest
+    environment: 
+      name: production
+      url: https://github.com
+    steps:
+      - name: deploy
+        # ...deployme         
           
   deploy-play-store:
     needs: [build]
