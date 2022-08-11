@@ -26,7 +26,7 @@ resource "azurerm_resource_group" "rg" {
 
 resource "azurerm_resource_group" "twdemo" {
   location = "north europe"
-  name = "createdviapipeline"
+  name     = "createdviapipeline"
 }
 variable "resource_group_name_prefix" {
   default     = "rg"
